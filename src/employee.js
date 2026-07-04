@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Employee = new mongoose.Schema({
-    _id: Number,
     EMPLOYEE_ID: Number,
     FIRST_NAME: String,
     LAST_NAME: String,

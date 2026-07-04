@@ -104,5 +104,24 @@ router.delete('/delete/:id', async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
-
+//Deleting employees via body of POSTMAN by identfitying Id
+router.delete('/delete', async (req,res) => {
+    try{
+        const empId = req.body._id;
+        if (!empId) {
+            return res.status(400).json({message: "Missing required field: _id"});
+        }
+        const deleteEmployee = await EmployeeModel.findByIdAndDelete(empId);
+        if (!deletedEmployee) {
+            return res.status(404).json({message: "Employee not found with the _id"});
+        }
+        res.status(200).json ({
+            message: "Employee successfully deleted",
+            deletedData: deletedEmployee
+        });
+    }catch(error) {
+        console.error("Error deleting the employee", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
 module.exports = router;
